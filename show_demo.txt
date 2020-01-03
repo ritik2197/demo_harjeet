@@ -1,0 +1,95 @@
+ 1-to create data base- use mytestdb
+ 2-to create inventory and insert the collection - 
+             db.inventory.insert([ 
+            { "student name": "shubham" , age: 22 , "roll no": 1000 , branch:"mechanical" },  
+            { "student name": "akash" , age: 19 , "roll no": 1002 , branch:"electrical" }, 
+            { "student name": "shivam" , age: 20 , "roll no": 1003 , branch:"computer science" },
+            { "student name": "shivam" , age: 20 , "roll no": 1004 , branch:"computer science" },
+            { "student name": "anshul" , age: 20 , "roll no": 1005 , branch:"computer science" },
+            { "student name": "harsh" , age: 19 , "roll no": 1006 , branch:"civil" }, 
+            { "student name": "riya" , age: 19 , "roll no": 1007 , branch:"computer science" },
+            { "student name": "shruti" , age: 20 , "roll no": 1008 , branch:"information technology" },
+            { "student name": "anshul" , age: 21 , "roll no": 1009 , branch:"information technology" },
+            { "student name": "sumit" , age: 20 , "roll no": 1010 , branch:"computer science" },
+            { "student name": "kapil" , age: 21 , "roll no": 1011 , branch:"electrical" },
+            { "student name": "shruti" , age: 19 , "roll no": 1012 , branch:"civil" },
+            { "student name": "sumit" , age: 22 , "roll no": 1013 , branch:"mechanical" },
+            { "student name": "suman" , age: 19 , "roll no": 1014 , branch:"mechanical" },
+             ])
+
+ 3 - to show the collection - db.inventory.find()
+ 
+ 3- to update the document - db.inventory.update({"student name" :"akash"},{$set: { "branch" : "mechanical"}});
+ 
+ 4- to delete the document - db.inventory.remove({"student name": "shivam"})
+
+ 5- to sort the document by age - db.inventory.find({age:19})
+
+ 6- to sort in accending order - db.inventory.find().sort({"branch":1})
+
+ 7-to sort in decending order - db.inventory.find().sort({"branch":-1})
+ 
+ 8- to sort using or operator - db.inventory.find(
+                                 {
+                                     $or: [
+                                               {"branch":"computer science"}, {branch:"information technology"}
+                                          ]
+                                 }
+                                             )
+
+
+ 9- to sort using and operator - db.inventory.find(
+                                 {
+                                     $and: [
+                                               {"branch":"computer science"}, {branch:"information technology"}
+                                           ]
+                                 }
+                                             )
+
+ 10 - to sort using not equals to - db.inventory.find({"branch":{$ne:"computer science"}})
+
+ 11- to insert new document without whole field - db.inventory.insert({"student name":"daisy" , branch:"computer science" , "new enroll":"yes"})
+
+ 12- to sort using less than -  db.inventory.find({"age":{$lt:20}})
+
+ 13- to sort using lessthan or equals to -  db.inventory.find({"age":{$lte:20}})
+
+ 14- to sort using less than equals to and update - db.inventory.updateMany( { "age": { $lt: 20 } }, { $set: { "under19team": 'yes'}})
+
+ 15 - to sort using greaterthan - db.inventory.find({"age":{$gt:20}})
+
+ 16- to restrict the no. of documents to be displayed - db.inventory.find().limit(3)
+
+ 17 - to query only selected things - db.inventory.find({"branch":"computer science"} , {_id:0, "student name":1})
+
+ 18- to insert relationship one to one - 
+                                           db.inventory.insert(
+                                                                  {
+                                                                    "student name" : "kapil",
+                                                                       address :  {
+                                                                                    street : "Audubon Road",
+                                                                                      city : "bangalore",
+                                                                                     state : "karnataka",
+                                                                                   country : "india"
+                                                                                 }
+                                                                  }
+                                                           )
+
+ 19 - to insert relationship one to many - 
+                                           db.inventory.insert(
+                                                                  {
+                                                                     "student name" : "kapil",
+                                                                             addresses : [
+                                                                                           {
+                                                                                              current city : "bangalore",
+                                                        	      		              street : "Audubon Road,
+                       									      state : "karnataka"
+                                                                                           }, 
+                                                                                                 {
+                     									            old city : "mumbai",
+                                                                                                     street : "vile parle",
+                                                                                                      state : "maharastra"
+                                                                                                 }
+                                                                                       ]
+                                                                   }
+                                                            )
